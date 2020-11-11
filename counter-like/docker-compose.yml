@@ -1,0 +1,25 @@
+version: "3"
+services:
+  server:
+    image: nginx
+    container_name: nginx_server_project-laravel
+    ports:
+      - 8080:80
+  backend:
+    build: .
+    container_name: laravel-project
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+  db:
+    image: mysql:5.7
+    container_name: project-laravel.db
+    hostname: laravel.db
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456@Abc
+      MYSQL_DATABASE: comment-laravel
+    ports:
+      - 3366:3306
